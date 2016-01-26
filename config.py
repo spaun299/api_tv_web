@@ -3,7 +3,7 @@ from flask_oauth import OAuth
 
 def database_url():
     db_url = os.environ['OPENSHIFT_POSTGRESQL_DB_URL'] if os.environ.get('OPENSHIFT_POSTGRESQL_DB_URL') else \
-        'postgresql://admin:1111@localhost:5432/api_tv_web'
+        'postgresql://admin:1111@localhost:5432/api'
 
     return db_url
 

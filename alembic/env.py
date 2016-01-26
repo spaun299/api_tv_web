@@ -4,9 +4,9 @@ from sqlalchemy import engine_from_config, pool
 from logging.config import fileConfig
 import os
 import sys
-parent_dir = os.path.abspath(os.path.join(os.getcwd(), "../iptv/iptv_app/models"))
+parent_dir = os.path.abspath(os.path.join(os.getcwd(), "../api/api_app/models"))
 sys.path.append(os.getcwd())
-from iptv_app.models import alembic_models
+from api_app.models import alembic_models
 
 
 config = context.config

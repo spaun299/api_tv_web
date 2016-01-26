@@ -1,5 +1,5 @@
-from iptv_app import init_app
+from api_app import init_app
 
 app = init_app()
 if __name__ == '__main__':
-    app.run(host='tvonline.in.ua', port=8080)
+    app.run(host='api-tvprogram.rhcloud.com')

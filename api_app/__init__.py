@@ -3,7 +3,7 @@ import config
 from .urls.blueprints import Blueprints
 from flask.ext.login import LoginManager, current_user
 from flask_sqlalchemy import SQLAlchemy
-from iptv_app.models.user import User
+from api_app.models.user import User
 from sqlalchemy.ext.declarative import declarative_base
 from flask_user import login_required, UserManager, SQLAlchemyAdapter
 from flask_mail import Mail

@@ -1,0 +1,14 @@
+Flask==0.10.1
+Flask-SQLAlchemy>=0.16
+SQLAlchemy>=1.0.8
+alembic
+Flask-Login>=0.2
+Flask-Mail>=0.9
+passlib>=1.6
+pycrypto>=2.6
+flask-user>=0.6
+Flask-WTF>=0.9
+py-bcrypt>=0.4
+psycopg2
+flask-oauth
+oauth2client

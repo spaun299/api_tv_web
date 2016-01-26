@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Телебачення онлайн - В розробці</title>
+      <style type="text/css">
+   body {
+    background-color: #cccccc;
+   }
+  </style>
+</head>
+<body>
+<script>
+var end = new Date('01/01/2016 12:00 AM');
+
+    var _second = 1000;
+    var _minute = _second * 60;
+    var _hour = _minute * 60;
+    var _day = _hour * 24;
+    var timer;
+
+    function showRemaining() {
+        var now = new Date();
+        var distance = end - now;
+        if (distance < 0) {
+
+            clearInterval(timer);
+            document.getElementById('countdown').innerHTML = 'З НОВИМ РОКОМ';
+
+            return;
+        }
+        var days = Math.floor(distance / _day);
+        var hours = Math.floor((distance % _day) / _hour);
+        var minutes = Math.floor((distance % _hour) / _minute);
+        var seconds = Math.floor((distance % _minute) / _second);
+        document.getElementById('countdown').innerHTML = 'Залишилося: ';
+        document.getElementById('countdown').innerHTML += days + 'дн ';
+        document.getElementById('countdown').innerHTML += hours + 'год ';
+        document.getElementById('countdown').innerHTML += minutes + 'хв ';
+        document.getElementById('countdown').innerHTML += seconds + 'сек';
+    }
+
+    timer = setInterval(showRemaining, 1000);
+</script>
+
+<h1 style="color: #9C1A1C" align="center">Просимо вибачення але сайт tvonline.in.ua на даний момент знаходиться в розробці</h1>
+<h2 style="color: #1d7a62" align="center">Запланована дата продакшину 01.01.2016р.</h2>
+<h2 style="color: #1d7a62" align="center"></h2>
+<h2 id="countdown" style="color: #1d7a62" align="center"></h2><br><br><br>
+<form action="{{ url_for('auth.login') }}" method="post">
+<h4 style="color: #3A7734" align="center">Увійти під іменем розробника</h4>
+ <div align="center">
+     <input type="text" placeholder="Логін" required name="user_name">
+    <input type="password" placeholder="Пароль" required name="password">
+    <input type="submit" value="Увійти">
+ </div>
+
+</form>
+</body>
+</html>

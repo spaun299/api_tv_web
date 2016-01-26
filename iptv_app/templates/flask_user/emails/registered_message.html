@@ -1,0 +1,14 @@
+{% extends 'flask_user/emails/base_message.html' %}
+
+{% block message %}
+
+<h1>Дякуємо вам за реєстрацію на нашому саті.</h1>
+
+{% if user_manager.enable_confirm_email and not user.confirmed_at %}
+<p>Щоб підтвердити вашу електронну адресу та закінчити реєстрацію перейдіть за <a href="{{ confirm_email_link }}">цим</a> посиланням.</p>
+    
+
+<p>Якщо ваша електронна адреса була використана не вами для реєстрації на сайті {{ app_name }} проігноруйте це повідомлення.</p>
+{% endif %}
+
+{% endblock %}

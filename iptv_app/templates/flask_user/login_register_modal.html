@@ -1,0 +1,287 @@
+   <script>
+      $(function () {
+
+        $('#loginform').on('submit', function (e) {
+            var submit_button = document.getElementById("login_button_submit");
+            var loading_login = document.getElementById("loading_login");
+            submit_button.disabled = true;
+            loading_login.hidden=false;
+          e.preventDefault();
+
+          $.ajax({
+            type: 'post',
+            url: '{{ url_for('auth.login') }}',
+            data: $('#loginform').serialize(),
+            success: function (data) {
+                submit_button.disabled = false;
+                loading_login.hidden=true;
+                $('#message').html(data.message);
+                if(data.alert){alert(data.alert)}
+                if(data.reload_page){
+                    location.reload()
+                }
+            }
+
+          });
+
+        });
+
+      });
+
+      $(function () {
+
+        $('#registerform').on('submit', function (e) {
+            var loading_login = document.getElementById("loading_register");
+            var submit_button = document.getElementById("register_button_submit");
+            submit_button.disabled = true;
+            loading_login.hidden = false;
+            password = $('#password').val();
+          e.preventDefault();
+            if(password !=$('#passwordReply').val()){
+                $('#message').html('Паролі не співпадають. Попробуйте ще раз.');
+                submit_button.disabled = false;
+                loading_login.hidden = true;
+
+            }
+            else if(password.length<7){
+                $('#message').html('Пароль повинен містити не менше семи символів.');
+                            submit_button.disabled = false;
+                            loading_login.hidden = true;
+
+            }
+            else{
+                $.ajax({
+            type: 'post',
+            url: '{{ url_for('auth.register') }}',
+            data: $('#registerform').serialize(),
+            success: function (data) {
+                submit_button.disabled = false;
+                loading_login.hidden = true;
+                $('#message').html(data.message);
+                if(data.alert){alert(data.alert)}
+            }
+
+          });}
+
+
+        });
+
+      });
+
+    </script>
+<style>
+    .nav-tabs {
+    margin-bottom: 15px;
+}
+.sign-with {
+    margin-top: 25px;
+    padding: 20px;
+}
+div#OR {
+    height: 30px;
+    width: 30px;
+    border: 1px solid #C2C2C2;
+    border-radius: 50%;
+    font-weight: bold;
+    line-height: 28px;
+    text-align: center;
+    font-size: 12px;
+    float: right;
+    position: absolute;
+    right: -16px;
+    top: 40%;
+    z-index: 1;
+    background: #DFDFDF;
+}
+#message {
+    color: #d9534f;
+    background-color: rgba(0, 139, 209, 0.3);
+    border-radius: 3px;
+}
+/* Hiding the checkbox, but allowing it to be focused */
+.badgebox
+{
+    opacity: 0;
+}
+
+.badgebox + .badge
+{
+    /* Move the check mark away when unchecked */
+    text-indent: -999999px;
+    /* Makes the badge's width stay the same checked and unchecked */
+	width: 27px;
+}
+
+.badgebox:focus + .badge
+{
+    /* Set something to make the badge looks focused */
+    /* This really depends on the application, in my case it was: */
+
+    /* Adding a light border */
+    box-shadow: inset 0px 0px 5px;
+    /* Taking the difference out of the padding */
+}
+
+.badgebox:checked + .badge
+{
+    /* Move the check mark back when checked */
+	text-indent: 0;
+}
+</style>
+
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="/static/bootstrap3.3.0/dist/css/bootstrap.css">
+
+<!-- Optional theme -->
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="/static/bootstrap3.3.0/dist/js/bootstrap.min.js"></script>
+
+<script>$('#myModal').modal('show');</script>
+<!-- Large modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×</button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Увійти/Зареєструватися</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-8" style="border-right: 1px dotted #C2C2C2;padding-right: 30px;">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" id="nav_modify">
+                            <li class="active"><a href="#Login" data-toggle="tab">Увійти</a></li>
+                            <li class="non_active"><a href="#Registration" data-toggle="tab">Реєстрація</a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="Login">
+                                <form role="form" class="form-horizontal" id="loginform">
+                                <div class="form-group">
+                                    <label for="email" class="col-sm-2 control-label_modify_tvonline">
+                                        Логін</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="email" placeholder="Логін" name="user_name" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1" class="col-sm-2 control-label_modify_tvonline">
+                                        Пароль</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Пароль" name="password" />
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-sm-10">
+                                        <button type="submit" class="btn_checkbox btn-primary btn-sm" id="login_button_submit">
+                                            Увійти</button>
+
+
+ <label for="primary" class="btn_checkbox btn-primary">Запам'ятати пароль?<input type="checkbox" id="primary" class="badgebox" checked name="remember_me"><span class="badge">&check;</span></label>
+                            </div>
+
+                                </div>
+                                  <i hidden class="fa fa-spinner fa-pulse fa-2x fa-fw" id="loading_login" style="color: #006699; position: fixed; margin-top: -32px; margin-left: 280px"></i>
+                                </form>
+
+
+                                <form>
+                                <div class="row"> <div class="col-sm-10">
+                                        <a href="{{ url_for('user.forgot_password') }}">Забули пароль?</a>
+                                    </div> </div></form>
+
+                            </div>
+                            <div class="tab-pane" id="Registration">
+                                <form role="form" class="form-horizontal" id="registerform">
+                                <div class="form-group">
+                                    <label for="name" class="col-sm-2 control-label_modify_tvonline name_register_form">
+                                        Логін</label>
+                                    <div class="col-sm-10">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <select class="form-control">
+                                                    <option>Чл</option>
+                                                    <option>Жн</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="text" id="name" class="form-control" name="username" placeholder="Логін" required/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email1" class="col-sm-2 control-label_modify_tvonline">
+                                        Email</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="email1" name="email" placeholder="Електронна адреса" required/>
+                                    </div>
+                                </div>
+                                    <div class="form-group">
+                                    <label for="shown_name" class="col-sm-2 control-label_modify_tvonline">
+                                        Нік</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="shown_name" name="shown_name" placeholder="Відображаюче ім'я" required/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="col-sm-2 control-label_modify_tvonline">
+                                        Пароль</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="Пароль" required/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="col-sm-2 control-label_modify_tvonline password_register_form">
+                                        Повторіть пароль</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" id="passwordReply" name="passwordReply" placeholder="Введіть пароль ще раз" required/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <button type="submit" class="btn btn-primary btn-sm" id="register_button_submit">
+                                            Зареєструватися</button>
+                                                                    </div>
+                                </div>
+                                    <i hidden class="fa fa-spinner fa-pulse fa-2x fa-fw" id="loading_register" style="color: #006699; position: fixed; margin-top: -32px; margin-left: 220px"></i>
+                                </form>
+
+                            </div>
+                        </div>
+                        <div id="OR" class="hidden-xs">
+                            АБО</div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row text-center sign-with">
+                            <div class="col-md-12">
+                                <h3>
+                                    Увійти за допомогою</h3>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="btn-group btn-group-justified">
+                                    <a href="{{ url_for('auth.vkontakte_login') }}" class="btn btn-primary">Vkontakte</a>
+                                    <a href="{{ url_for('auth.google_login') }}" class="btn btn-danger">Google</a>
+                                </div>
+                                <div class="btn-group btn-group-justified">
+                                    <a href="{{ url_for('auth.facebook_login') }}" class="btn btn-primary">Facebook</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="width: 85%; margin-left: 7%" id="message" align="center"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

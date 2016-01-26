@@ -1,0 +1,66 @@
+{% extends 'flask_user/member_base.html' %}
+
+{% block content %}
+    <style>
+
+    img.profile_form{
+        margin-left: 150px;
+        border-style: solid;
+        border-color: whitesmoke;
+        border-width: 3px;
+    }
+    a.profile_form{
+        color: whitesmoke;
+    }
+    a.profile_form:hover{
+        color: yellowgreen;
+    }
+    h1.username{
+        color: whitesmoke;
+        margin-left: 150px;
+    }
+    div .profile_form{
+        border: groove;
+        margin-left: 330px;
+        margin-top: -110px;
+        position: absolute;
+
+    }
+    #change_login{
+        border: groove;
+        margin-left: 330px;
+        margin-top: -105px;
+        position: absolute;
+        width: 180px;
+    }
+        #change_pass{
+                border: groove;
+        margin-left: 330px;
+        margin-top: -70px;
+        position: absolute;
+            width: 180px;
+    }    #change_avatar{
+                border: groove;
+        margin-left: 330px;
+        margin-top: -35px;
+        position: absolute;
+        width: 180px;
+    }
+
+    </style>
+
+{% from "flask_user/_macros.html" import render_field, render_checkbox_field, render_submit_field %}
+
+<h1 class="username">{{ g.user.shown_name }}</h1>
+<img src="{{ g.user.avatar() }}" class="profile_form">
+<div id="vk_like"></div>
+ <div class="profile_form">
+{% if user_manager.enable_change_username %}
+<a href="{{ url_for('user.change_username') }}" target="_blank">><button id="change_login" class="profile_form">Змінити логін</button></a>
+{% endif %}
+{% if user_manager.enable_change_password %}
+<a href="{{ url_for('user.change_password') }}"><button id="change_pass" class="profile_form">Змінити пароль</button></a>
+{% endif %}
+  <a href="https://uk.gravatar.com/">  <button id="change_avatar" class="profile_form">Змінити аватарку</button></a>
+</div>
+{% endblock %}

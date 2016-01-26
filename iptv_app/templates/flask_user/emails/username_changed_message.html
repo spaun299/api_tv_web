@@ -1,0 +1,6 @@
+{% extends 'flask_user/emails/base_message.html' %}
+
+{% block message %}
+<p>Ваш логін був змінений.</p>
+<p>Якщо зміна логіну була здійснена не вами, будь-ласка <a href="{{ url_for('user.login', _external=True) }}">увійдіть</a> використовуючи вашу електронну адресу та змініть пароль.</p>
+{% endblock %}

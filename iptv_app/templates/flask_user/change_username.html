@@ -1,0 +1,15 @@
+{% extends 'flask_user/member_base.html' %}
+
+{% block content %}
+{% from "flask_user/_macros.html" import render_field, render_submit_field %}
+
+
+<form action="" method="POST" class="form_user" role="form">
+<h1>Змінити логін</h1>
+    {{ form.hidden_tag() }}
+    {{ render_field(form.new_username, tabindex=10, label='Новий логін') }}
+    {{ render_field(form.old_password, tabindex=20, label='Пароль') }}
+    {{ render_submit_field(form.submit, tabindex=90, label='Змінити логін') }}
+</form>
+
+{% endblock %}

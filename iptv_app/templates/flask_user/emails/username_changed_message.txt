@@ -1,0 +1,10 @@
+{% extends 'flask_user/emails/base_message.txt' %}
+
+{% block message %}
+Ваш логін був змінений.
+
+Якщо зміна логіну була здійснена не вами, будь-ласка увійдіть використовуючи вашу електронну адресу та змініть пароль.
+    {{ url_for('user.login', _external=True) }}
+{% endblock %}
+
+

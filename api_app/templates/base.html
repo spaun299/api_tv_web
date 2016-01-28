@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Телебачення онлайн</title>
+<title>TV-API</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="../static/css/style.css" rel="stylesheet" type="text/css" media="all" />
@@ -101,6 +101,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                  {% if active_page=='now_online' %}
                     <li class="active"><a href="shortcodes.html">Спробувати Онлайн</a></li>{% else %}
                  <li><a href="shortcodes.html">Спробувати Онлайн</a></li>{% endif %}
+					{% if active_page=='channel_list' %}
+					<li class="active"><a href>Список телеканалів</a></li>{% else %}
+                 <li><a href>Список телеканалів</a></li>{% endif %}
+
                 {% if g.user.is_authenticated %}
                 {% if active_page=='profile' %}
 					<li class="active"><a href="{{ url_for('user.profile') }}">{{ g.user.shown_name }}</a>

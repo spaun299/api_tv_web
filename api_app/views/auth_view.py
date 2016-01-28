@@ -351,7 +351,6 @@ def vkontakte_authorized():
 
 @auth_bp.route('/google_login')
 def google_login():
-    print(os.getcwd())
     try:
         flow = client.flow_from_clientsecrets(os.getcwd() + '/app-root/runtime/repo/client_secret.json',
                                               scope=['https://www.googleapis.com/auth/userinfo.email',

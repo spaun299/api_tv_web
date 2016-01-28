@@ -353,7 +353,7 @@ def vkontakte_authorized():
 def google_login():
     print(os.getcwd())
     try:
-        flow = client.flow_from_clientsecrets(os.getcwd() + 'app-root/runtime/repo/client_secret.json',
+        flow = client.flow_from_clientsecrets(os.getcwd() + '/app-root/runtime/repo/client_secret.json',
                                               scope=['https://www.googleapis.com/auth/userinfo.email',
                                                      'https://www.googleapis.com/auth/userinfo.profile'],
                                               redirect_uri='{host}/auth/google_login'.format(host=get_app_url()))

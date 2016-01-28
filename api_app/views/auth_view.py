@@ -18,9 +18,7 @@ import urllib
 from oauth2client import client
 from utils.openshift import get_app_url
 import os
-import sys
-parent_dir = os.path.abspath(os.path.join(os.getcwd(), "../../repo"))
-sys.path.append(os.getcwd())
+
 
 facebook = RegisterSocNetwork(service='facebook').get_service
 vkontakte = RegisterSocNetwork(service='vkontakte')
@@ -312,7 +310,7 @@ def facebook_authorized(resp):
 
 @auth_bp.route('/vkontakte_login')
 def vkontakte_login():
-    print(sys.path)
+    print(os.path)
     return redirect(vkontakte.get_service)
 
 
@@ -353,8 +351,8 @@ def vkontakte_authorized():
 
 @auth_bp.route('/google_login')
 def google_login():
-
-    flow = client.flow_from_clientsecrets('client_secret.json',
+    print(os.getcwd())
+    flow = client.flow_from_clientsecrets(os.getcwd() + '/client_secret.json',
                                           scope=['https://www.googleapis.com/auth/userinfo.email',
                                                  'https://www.googleapis.com/auth/userinfo.profile'],
                                           redirect_uri='{host}/auth/google_login'.format(host=get_app_url()))

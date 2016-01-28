@@ -352,7 +352,7 @@ def google_login():
 
     flow = client.flow_from_clientsecrets('client_secret.json', scope=['https://www.googleapis.com/auth/userinfo.email',
                                                                       'https://www.googleapis.com/auth/userinfo.profile'],
-                                          redirect_uri='http://tvonline.in.ua:8080/auth/google_login')
+                                          redirect_uri='http://api-tvprogram.rhcloud.com/auth/google_login')
     flow.params['access_type'] = 'online'
     if 'code' not in request.args:
         auth_uri = flow.step1_get_authorize_url()

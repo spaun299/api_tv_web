@@ -29,7 +29,7 @@ class RegisterSocNetwork:
             service = 'https://oauth.vk.com/authorize?client_id={client_id}&display=page&scope={scope}&redirect_uri=' \
                       '{redirect_url}&v=5.0&response_type=code'.format(
                        client_id='5145835', scope='email',
-                       redirect_url='http://tvonline.in.ua:8080/auth/vkontakte_login/authorized')
+                       redirect_url='http://api-tvprogram.rhcloud.com/auth/vkontakte_login/authorized')
 
         elif service_name == 'google':
             service = oauth.remote_app('google',
@@ -53,5 +53,5 @@ class RegisterSocNetwork:
             url = 'https://oauth.vk.com/access_token?client_id={client_id}&' \
                   'client_secret={client_secret}&redirect_uri={redirect_url}&code={code}'.format(
                        client_id='5145835', client_secret='910H8XhkfJs0qayNRKRM',
-                       redirect_url='http://tvonline.in.ua:8080/auth/vkontakte_login/authorized', code=code)
+                       redirect_url='http://api-tvprogram.rhcloud.com/auth/vkontakte_login/authorized', code=code)
         return json.load(urllib.urlopen(url))

@@ -21,8 +21,6 @@ import os
 import sys
 parent_dir = os.path.abspath(os.path.join(os.getcwd(), "../../repo"))
 sys.path.append(os.getcwd())
-print(sys.path)
-
 
 facebook = RegisterSocNetwork(service='facebook').get_service
 vkontakte = RegisterSocNetwork(service='vkontakte')
@@ -314,6 +312,7 @@ def facebook_authorized(resp):
 
 @auth_bp.route('/vkontakte_login')
 def vkontakte_login():
+    print(sys.path)
     return redirect(vkontakte.get_service)
 
 

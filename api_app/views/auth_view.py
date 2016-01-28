@@ -17,6 +17,11 @@ import json
 import urllib
 from oauth2client import client
 from utils.openshift import get_app_url
+import os
+import sys
+parent_dir = os.path.abspath(os.path.join(os.getcwd(), "../../repo"))
+sys.path.append(os.getcwd())
+print(sys.path)
 
 
 facebook = RegisterSocNetwork(service='facebook').get_service

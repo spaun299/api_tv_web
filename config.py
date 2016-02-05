@@ -13,6 +13,7 @@ SECRET_KEY = 'asdfkjsdg;lk2asd`~s63xzcx/.xalsdfriotpeir342dsfdsefdlfm'
 OPENSHIFT_PASSWORD = SECRET_KEY
 MAIL_USERNAME = 'api.tv.web@gmail.com'
 MAIL_PASSWORD = "/~sdfk`ds21wfvcbmghj45xzccc687xvcjh;;65~13"
+SOCIAL_NETWORK_MAIL = 'tvonline.in.ua@gmail.com'
 SOCIAL_NETWORK_PASSWORD = 'mvfd4v~sda3sa0s-dsdsdxz`+xl;gf'
 MAIL_DEFAULT_SENDER = 'api.tv.web@gmail.com <api.tv.web@gmail.com>'
 MAIL_SERVER = 'smtp.gmail.com'

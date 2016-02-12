@@ -1,7 +1,8 @@
 from flask_oauth import OAuth
 import urllib
 import json
-
+from flask import request
+from utils.openshift import get_app_url
 
 oauth = OAuth()
 
@@ -17,6 +18,7 @@ class RegisterSocNetwork:
     @staticmethod
     def build(service_name):
         service = False
+        host = get_app_url()
         if service_name == 'facebook':
             service = oauth.remote_app('tvonline.in.ua',
                                        base_url='https://graph.facebook.com/',
@@ -29,7 +31,7 @@ class RegisterSocNetwork:
             service = 'https://oauth.vk.com/authorize?client_id={client_id}&display=page&scope={scope}&redirect_uri=' \
                       '{redirect_url}&v=5.0&response_type=code'.format(
                        client_id='5145835', scope='email',
-                       redirect_url='http://tvonline.in.ua:8080/auth/vkontakte_login/authorized')
+                       redirect_url='{host}/auth/vkontakte_login/authorized'.format(host=host))
 
         elif service_name == 'google':
             service = oauth.remote_app('google',
@@ -49,9 +51,10 @@ class RegisterSocNetwork:
 
     def get_token(self, code):
         url = ''
+        host = get_app_url()
         if self.service == 'vkontakte':
             url = 'https://oauth.vk.com/access_token?client_id={client_id}&' \
                   'client_secret={client_secret}&redirect_uri={redirect_url}&code={code}'.format(
                        client_id='5145835', client_secret='910H8XhkfJs0qayNRKRM',
-                       redirect_url='http://tvonline.in.ua:8080/auth/vkontakte_login/authorized', code=code)
+                       redirect_url='{host}/auth/vkontakte_login/authorized'.format(host=host), code=code)
         return json.load(urllib.urlopen(url))

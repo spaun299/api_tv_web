@@ -7,5 +7,4 @@ from flask.ext.login import login_required
 @channel_bp.route('/')
 @login_required
 def channel():
-
     return render_template('channel.html', active_page=ACTIVE_PAGES['channels'])

@@ -18,4 +18,4 @@ then on openshift run
 alembic --config='alembic_openshift.ini' upgrade head
 Notice, alembic versions of changes must be equal on local machine and on openshift server
 .
-Also you need to add tvonline.in.ua to your localhost: Add 127.0.0.1 tvonline.in.ua to /etc/hosts
+Also you need to add api-tvprogram.rhcloud.com to your localhost: Add 127.0.0.1 api-tvprogram.rhcloud.com to /etc/hosts

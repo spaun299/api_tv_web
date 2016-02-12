@@ -1,6 +1,7 @@
 import os
 from flask_oauth import OAuth
 
+
 def database_url():
     db_url = os.environ['OPENSHIFT_POSTGRESQL_DB_URL'] if os.environ.get('OPENSHIFT_POSTGRESQL_DB_URL') else \
         'postgresql://admin:1111@localhost:5432/api'
@@ -13,7 +14,7 @@ SECRET_KEY = 'asdfkjsdg;lk2asd`~s63xzcx/.xalsdfriotpeir342dsfdsefdlfm'
 OPENSHIFT_PASSWORD = SECRET_KEY
 MAIL_USERNAME = 'api.tv.web@gmail.com'
 MAIL_PASSWORD = "/~sdfk`ds21wfvcbmghj45xzccc687xvcjh;;65~13"
-SOCIAL_NETWORK_MAIL = 'tvonline.in.ua@gmail.com'
+GOOGLE_DEV_CONSOLE_LOGIN = 'tvonline.in.ua@gmail.com'
 SOCIAL_NETWORK_PASSWORD = 'mvfd4v~sda3sa0s-dsdsdxz`+xl;gf'
 MAIL_DEFAULT_SENDER = 'api.tv.web@gmail.com <api.tv.web@gmail.com>'
 MAIL_SERVER = 'smtp.gmail.com'

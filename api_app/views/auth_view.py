@@ -16,7 +16,9 @@ from sqlalchemy import or_
 import json
 import urllib
 from oauth2client import client
-import httplib2
+from utils.openshift import get_app_url
+import os
+from exceptions import IOError
 
 
 facebook = RegisterSocNetwork(service='facebook').get_service
@@ -52,7 +54,7 @@ def login():
         else:
             return ajax_response(message="Ви ввели невірний логін або пароль")
     user_email = None
-    session['login_via'] = 'tv.online.in.ua'
+    session['login_via'] = request.host
     remember_me = True if data.get('remember_me') else False
     if user and db_adapter.UserEmailClass:
         user_email = db_adapter.find_first_object(db_adapter.UserEmailClass,
@@ -130,7 +132,8 @@ def register():
                 user_fields['is_active'] = True
         data = request.form
         # For all form fields
-        user_fields['registered_via'] = 'tv.online.in.ua'
+        print(request.args)
+        user_fields['registered_via'] = 'api-tvprogram.rhcloud.com'
         for field_name, field_value in data.items():
             # Hash password field
             if field_name == 'password':
@@ -349,10 +352,16 @@ def vkontakte_authorized():
 
 @auth_bp.route('/google_login')
 def google_login():
-
-    flow = client.flow_from_clientsecrets('client_secret.json', scope=['https://www.googleapis.com/auth/userinfo.email',
-                                                                      'https://www.googleapis.com/auth/userinfo.profile'],
-                                          redirect_uri='http://tvonline.in.ua:8080/auth/google_login')
+    try:
+        flow = client.flow_from_clientsecrets(os.getcwd() + '/app-root/runtime/repo/client_secret.json',
+                                              scope=['https://www.googleapis.com/auth/userinfo.email',
+                                                     'https://www.googleapis.com/auth/userinfo.profile'],
+                                              redirect_uri='{host}/auth/google_login'.format(host=get_app_url()))
+    except IOError as e:
+        flow = client.flow_from_clientsecrets('client_secret.json',
+                                              scope=['https://www.googleapis.com/auth/userinfo.email',
+                                                     'https://www.googleapis.com/auth/userinfo.profile'],
+                                              redirect_uri='{host}/auth/google_login'.format(host=get_app_url()))
     flow.params['access_type'] = 'online'
     if 'code' not in request.args:
         auth_uri = flow.step1_get_authorize_url()
